@@ -1,33 +1,29 @@
-# == Class: luet::install
+# @summary Handles the installation of luet itself
 #
-# Installs the luet package manager
+# @api private
 #
 class luet::install {
 
-  if $luet::manage_install {
+  $install_script_url = 'https://get.mocaccino.org/luet/get_luet_root.sh'
 
-    if $luet::install_method == 'repo' {
+  if $luet::install_method == 'repo' {
 
-      package { 'luet':
-        ensure => installed
-      }
-
-    } elsif $luet::install_method == 'source' {
-
-      exec {
-        'install-luet':
-          command => 'curl -q https://get.mocaccino.org/luet/get_luet_root.sh | /bin/sh',
-          creates => '/usr/bin/luet',
-          path    => ['/bin', '/usr/bin', '/usr/local/bin']
-      }
-
+    package { $luet::package_name:
+      ensure => $luet::package_ensure,
     }
 
-    # Ensure luet is installed before any packages are installed using luet explicitly
-    # We can't force this for packages where the provider is not set explicitly as its only
-    # resolved by the agent at runtime
-    Class['luet::install'] -> Package<| provider == luet |>
+  } elsif $luet::install_method == 'source' {
+
+    exec {
+      'install-luet':
+        command => "curl -q ${install_script_url} | sh",
+        path    => ['/bin', '/usr/bin', '/usr/local/bin'],
+        creates => '/usr/bin/luet',
+    }
 
   }
+
+  # Ensure luet is installed before it is marked as ready for use
+  Class['luet::install'] -> Class['luet::ready']
 
 }

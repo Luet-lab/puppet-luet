@@ -18,6 +18,22 @@ on systems using the luet package manager.
 
 ## Setup
 
+### What luet affects
+
+This module can manage installation of the luet package manager on both
+systems where luet is made available via native packages, or any other
+system via manual installation.
+
+It can be used to install/remove packages using the luet package manager, and
+luet repositories (which are themselves managed via packages).
+
+### Setup requirements
+
+Install this module using your `Puppetfile` or `puppet module tool`.
+
+This module has very modest dependencies which will very likely be
+preinstalled on your system anyway.
+
 ### Beginning with luet
 
 The very basic steps needed for a user to get the module up and running. This
@@ -61,7 +77,44 @@ for example on a MocaccinoOS system, you can use luet simply with the following.
 include luet
 ```
 
+### Migrating from another supported package manager
+
+Luet has support from migrating the list of installed packages from other
+package managers to aid in migration. At the moment, the only supported 
+system by both luet and this module is Sabayon's Entropy package manager.
+
+You can migrate from entropy to luet using one of the following methods.
+
+When installing luet, specify the `migrate_from` parameter:
+
+```puppet
+class { 'luet':
+    manage_install => true,
+    migrate_from   => ['entropy'],
+}
+```
+
+Alternatively you can include the relevant migration class directly. This
+method might be more suitable if you're using an ENC, or including classes
+from hiera.
+
+```puppet
+include luet::migrate::entropy
+```
+
+This module will ensure that migration is done before any packages are
+installed when the `luet` provider is specified explicitly. If you are not
+specifying a provider and rely on the OS autodetection to select the luet
+provider, you might want to make package installations depend on 
+`Class['luet::ready']` to prevent packages being installed before the
+migration is run.
+
 ### Enabling luet repositories
+
+For official luet repositories which are listed in the default
+repository index shipped with luet, you can install these using the
+puppet `package` resource. These packages use the `repository` category,
+so you can install them like this:
 
 ```puppet
 package { 'mocaccino-portage-stable':
@@ -73,11 +126,6 @@ package { 'mocaccino-portage-stable':
 
 ### Installing packages using luet
 
-This module will suggest luet as the default package manager where luet is the
-primary package manager, e.g. on `MocaccinoOS`.
-
-You can explicitly set the luet provider to be used when installing a package.
-
 ```puppet
 package { 'foo':
   ensure   => installed,
@@ -87,9 +135,13 @@ package { 'foo':
 }
 ```
 
+This module will suggest luet as the default package manager where luet is the
+primary package manager, e.g. on `MocaccinoOS`.
+
+You can explicitly set the luet provider to be used when installing a package,
+as shown above.
+
 ## Development
 
-This module is under under development and functionality at present is quite
-limited. Pull requests to extend or enhance the module are welcome.
-
-
+Both this module and luet itself are under under development and functionality
+may be limited. Pull requests to extend or enhance the module are welcome.
