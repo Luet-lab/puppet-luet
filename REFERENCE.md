@@ -21,6 +21,11 @@
 * [`Luet::InstallMethod`](#luetinstallmethod): Defines the available installation methods for luet
 * [`Luet::MigrateBackend`](#luetmigratebackend): Defines the types of package manager luet supports migrations from
 
+### Tasks
+
+* [`cleanup`](#cleanup): Run `luet cleanup` on target nodes to free up disk space used by downloaded packages
+* [`update`](#update): Run `luet repo update` on target nodes to refresh repository definitions
+
 ## Classes
 
 ### `luet`
@@ -173,4 +178,26 @@ Alias of `Enum['repo', 'source']`
 Defines the types of package manager luet supports migrations from
 
 Alias of `Enum['entropy']`
+
+## Tasks
+
+### `cleanup`
+
+Run `luet cleanup` on target nodes to free up disk space used by downloaded packages
+
+**Supports noop?** false
+
+### `update`
+
+Run `luet repo update` on target nodes to refresh repository definitions
+
+**Supports noop?** false
+
+#### Parameters
+
+##### `repo`
+
+Data type: `Optional[Pattern[/^[a-zA-Z0-9._-]+$/]]`
+
+Restrict update to only this named repository
 

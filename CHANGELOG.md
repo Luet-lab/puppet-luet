@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 * Support for migrating from Entropy systems to Luet
 * Support for customising the package name/ensure when installing from `repo`
+* `luet::cleanup` and `luet::update` tasks
 * Reference documentation
 
 **Changed**
