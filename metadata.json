@@ -2,9 +2,11 @@
   "name": "optiz0r-luet",
   "version": "0.1.0",
   "author": "Ben Roberts",
-  "summary": "",
+  "summary": "Manage systems using luet package manager",
   "license": "MIT",
-  "source": "",
+  "source": "https://github.com/Luet-lab/puppet-luet",
+  "project_page": "https://mocaccino.org",
+  "issues_url": "https://github.com/Luet-lab/puppet-luet/issues",
   "dependencies": [
 
   ],
