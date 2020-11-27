@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## NEXT
+## Release 0.2.0 (2020-11-27)
 
 **Added**
 
@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 
 * `luet::install` class is now only included if luet is being installed by module 
 
-## Release 0.1.0
+## Release 0.1.0 (2020-11-26)
 
 Initial version
 

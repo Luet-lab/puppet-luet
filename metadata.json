@@ -1,6 +1,6 @@
 {
   "name": "optiz0r-luet",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Ben Roberts",
   "summary": "Manage systems using luet package manager",
   "license": "MIT",
