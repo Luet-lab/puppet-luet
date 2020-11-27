@@ -4,8 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Release 0.1.0
 
+Initial version
+
 **Features**
 
-**Bugfixes**
+* Add support for installing luet package manager
+* Add luet package provider
 
-**Known Issues**
