@@ -45,6 +45,7 @@ branches:
   only:
     - master
     - /^v\d/
+    - main
 notifications:
   email: false
 deploy:
