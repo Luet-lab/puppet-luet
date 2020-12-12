@@ -120,6 +120,7 @@ so you can install them like this:
 package { 'mocaccino-portage-stable':
   ensure   => present,
   category => 'repository',
+  provider => 'luet',
   name     => 'mocaccino-portage-stable';
 }
 ```
